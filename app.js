@@ -13,14 +13,14 @@ const SCREEN_PROFILE = 'profile';
 const SCREEN_DETAILS = 'details';
 
 // --- Global Variables (Declared only once) ---
-let splashScreen, splashTitle, splashSubtitle, prakritiFrame, authScreen, dashboardScreen, questionnaireScreen, resultsScreen, processingScreen, loginForm, registerForm, showRegisterLink, showLoginLink, questionContainer, prevBtn, nextBtn, currentQNumberEl, totalQNumberEl, resultDosha, resultDescription, retakeBtn, logoutBtn, messageBox, messageText, startAssessmentBtn, knowAyurvedaBtn, viewHistoryBtn, dashboardLogoutBtn, backToDashboardBtn, resultDoshaImageContainer, resultDescriptionContainer, resultDoshaImage, getChartBtn, nextStepsPrompt, chartViewScreen, chartViewImage, backToResultsBtn, goToDashboardBtn, historyViewScreen, historyList, backFromHistoryBtn, basicsViewScreen, backFromBasicsBtn, carouselContainer, carouselTrack, carouselPrevBtn, carouselNextBtn, carouselCounter; 
+let splashScreen, splashTitle, splashSubtitle, prakritiFrame, authScreen, dashboardScreen, questionnaireScreen, resultsScreen, processingScreen, loginForm, registerForm, showRegisterLink, showLoginLink, questionContainer, prevBtn, nextBtn, currentQQuestionContainer, totalQNumberEl, resultDosha, resultDescription, retakeBtn, logoutBtn, messageBox, messageText, startAssessmentBtn, knowAyurvedaBtn, viewHistoryBtn, dashboardLogoutBtn, backToDashboardBtn, resultDoshaImageContainer, resultDescriptionContainer, resultDoshaImage, getChartBtn, nextStepsPrompt, chartViewScreen, chartViewImage, backToResultsBtn, goToDashboardBtn, historyViewScreen, historyList, backFromHistoryBtn, basicsViewScreen, backFromBasicsBtn, carouselContainer, carouselTrack, carouselPrevBtn, carouselNextBtn, carouselCounter; 
 
 // --- State Management ---
 let currentQuestionIndex = 0;
 let userAnswers = [];
 let currentUser = null;
 let finalDoshaResult = null;
-let currentImageIndex = 0; // Tracks image index for button state and counter
+let currentImageIndex = 0; 
 let touchStartX = 0;       
 
 // --- Carousel Images Data (MAPPING TO 1.png through 7.png) ---
@@ -59,12 +59,12 @@ const doshaDescriptions = {
     Pitta: {
         title: "Pitta (Fire + Water)",
         description: "Pitta types are known for their sharp intellect, ambition, and strong digestion. Governed by the fire element, they are warm, sharp, and intense. In balance, Pittas are excellent leaders and decision-makers. Out of balance, they can be prone to anger, inflammation, and skin rashes.",
-        traits: ["Oily skin, muscular build", "Intense emotions, sharp intellect", "Moderate, sound sleep", "Prefers cool weather and food", "Responds to stress with irritability"]
+        traits: ["Oily skin, muscular build", "Intense emotions, sharp intellect", "Moderate, sound sleep", "Prefers cool weather and food", "Responses to stress with irritability"]
     },
     Kapha: {
         title: "Kapha (Earth + Water)",
         description: "Kapha individuals are calm, stable, and compassionate. Their qualities are heavy, slow, cool, and smooth. When balanced, Kaphas are loving and supportive with strong stamina. Out of balance, they can experience weight gain, sluggishness, and congestion.",
-        traits: ["Balanced/oily skin, heavier build", "Calm demeanor, thoughtful", "Deep, heavy sleep", "Prefers warm, dry weather", "Responds to stress with withdrawal"]
+        traits: ["Balanced/oily skin, heavier build", "Calm demeanor, thoughtful", "Deep, heavy sleep", "Prefers warm, dry weather", "Responses to stress with withdrawal"]
     }
 };
 
@@ -76,7 +76,7 @@ const doshaIcons = {
     'default': 'default_icon.jpg'
 };
 
-// --- Next Steps Images (Chart Images - FIXED TO UPLOADED FILENAMES) ---
+// --- Next Steps Images (Chart Images) ---
 const nextStepsImages = {
     Vata: 'vata_next_steps.png', 
     Pitta: 'pitta_next_steps.png', 
@@ -107,6 +107,7 @@ function toggleAuthForms (formToShow) {
     }
 }
 
+/** FIX: Ensured the new user is saved back to Local Storage. */
 function handleRegister(e) {
     e.preventDefault();
     const { registerForm } = getElements();
@@ -131,7 +132,9 @@ function handleRegister(e) {
 
     // Initialize user with history array
     users.push({ username, password, history: [] }); 
-    localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+    // Save the updated array back to Local Storage
+    localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users)); 
+    
     showMessage("Registration successful! Please log in.", false);
     toggleAuthForms('login');
     registerForm.reset();
@@ -620,8 +623,10 @@ function initializeApplication() {
     // Attach all event listeners
     showRegisterLink.addEventListener('click', (e) => { e.preventDefault(); toggleAuthForms('register'); });
     showLoginLink.addEventListener('click', (e) => { e.preventDefault(); toggleAuthForms('login'); });
+    // --- ATTACHING FORM SUBMISSION LISTENERS ---
     registerForm.addEventListener('submit', handleRegister);
     loginForm.addEventListener('submit', handleLogin);
+    // ------------------------------------------
     
     startAssessmentBtn.addEventListener('click', () => showScreen(SCREEN_QUESTIONNAIRE));
     // Dashboard Buttons
