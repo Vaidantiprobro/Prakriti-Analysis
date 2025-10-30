@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IHWP - Prakriti Self-Assessment</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?
+family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-gray-50"> 
+
+<div id="ayurveda-bg-blur" class="blurred-bg-image"></div>
+
+<div id="splash-screen" class="fixed inset-0 flex items-center justify-center z-50 transition-opacity duration-1000">
+    
+    <img src="splash-bg-image.jpg" alt="Meditating figure with chakras" class="absolute inset-0 w-full h-full object-cover z-0">
+    
+    <div class="relative max-w-2xl w-full p-8 text-center z-10" id="splash-content-wrapper">
+        
+        <div id="prakriti-frame" class="relative bg-black/70 backdrop-blur-sm p-12 shadow-2xl shadow-black/50 rounded-2xl opacity-0 transition-opacity duration-1000">
+            
+            <h1 id="splash-title" class="text-4xl sm:text-5xl font-extrabold text-white opacity-0 transition-all duration-1000 ease-out transform translate-y-4">
+                <span class="text-yellow-400">Prakriti</span> <span class="text-indigo-400">Self</span>-<span class="text-teal-400">Assessment</span>
+            </h1>
+            <p id="splash-subtitle" class="mt-4 text-xl text-gray-300 opacity-0 transition-opacity duration-1000 delay-700">Finding your true nature.</p>
+        </div>
+    </div>
+</div>
+
+<div id="app" class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-4xl opacity-0 transition-opacity duration-1000 relative z-10">
+    
+    <header class="text-center mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-indigo-400">Prakriti Self-Assessment</h1> 
+        <p class="text-gray-400 mt-2">Discover your unique mind-body constitution.</p>
+    </header>
+
+    <section id="auth-screen" class="relative rounded-xl shadow-lg border border-gray-700 overflow-hidden max-w-xl mx-auto"> 
+        <img src="login-bg-image.jpg" alt="Lush green leaves background" class="absolute inset-0 w-full h-full object-cover z-0 opacity-70"> 
+        
+        <div id="auth-container" class="relative z-10 bg-black/10 backdrop-blur-sm p-10 rounded-xl"> 
+            
+            <form id="login-form">
+                <h2 class="text-2xl font-semibold mb-6 text-center text-white">Login</h2>
+                <div class="mb-4">
+                    <label for="login-username" class="block text-gray-300 mb-2">Username</label> 
+                    <input type="text" id="login-username" class="w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block text-gray-300 mb-2">Password</label> 
+                    <input type="password" id="login-password" class="w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-500 transition duration-300">Login</button>
+                <p class="text-center mt-4 text-gray-300"> 
+                    Don't have an account? <a href="#" id="show-register" class="text-indigo-400 hover:underline">Register here</a>
+                </p>
+            </form>
+            
+            <form id="register-form" class="hidden">
+                <h2 class="text-2xl font-semibold mb-6 text-center text-white">Register</h2>
+                <div class="mb-4">
+                    <label for="register-username" class="block text-gray-300 mb-2">Username</label> 
+                    <input type="text" id="register-username" class="w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="register-password" class="block text-gray-300 mb-2">Password</label> 
+                    <input type="password" id="login-password" class="w-full px-4 py-2 border border-gray-600 bg-gray-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-500 transition duration-300">Register</button>
+                <p class="text-center mt-4 text-gray-300"> 
+                    Already have an account? <a href="#" id="show-login" class="text-indigo-400 hover:underline">Login here</a>
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <section id="dashboard-screen" class="hidden relative p-8 rounded-xl shadow-lg border border-gray-700 overflow-hidden max-w-2xl mx-auto bg-black/70 backdrop-blur-sm">
+        
+        <div class="relative z-10 text-center p-8 rounded-xl bg-black/70 backdrop-blur-sm">
+            <h2 class="text-3xl font-bold mb-2 text-white">Welcome Back!</h2>
+            <p class="text-gray-300 mb-8">Choose your path to wellness.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <button id="start-assessment-btn" class="flex flex-col items-center justify-center p-6 bg-purple-700 text-white rounded-lg shadow-xl transition duration-300 hover:bg-purple-600 transform hover:scale-105">
+                    <span class="text-4xl mb-2">🌿</span>
+                    <span class="font-semibold text-lg">Take Self-Assessment</span>
+                    <span class="text-sm opacity-80 mt-1">Discover your Prakriti</span>
+                </button>
+                
+                <button id="know-ayurveda-btn" class="flex flex-col items-center justify-center p-6 bg-amber-600 text-white rounded-lg shadow-xl transition duration-300 hover:bg-amber-500 transform hover:scale-105">
+                    <span class="text-4xl mb-2">📖</span>
+                    <span class="font-semibold text-lg">Know Ayurveda Basics</span>
+                    <span class="text-sm opacity-80 mt-1">Learn the fundamentals</span>
+                </button>
+                
+                <button id="view-history-btn" class="flex flex-col items-center justify-center p-6 bg-emerald-600 text-white rounded-lg shadow-xl transition duration-300 hover:bg-emerald-500 transform hover:scale-105">
+                    <span class="text-4xl mb-2">📜</span>
+                    <span class="font-semibold text-lg">View Results History</span>
+                    <span class="text-sm opacity-80 mt-1">Review past assessments</span>
+                </button>
+            </div>
+            
+            <button id="dashboard-logout-btn" class="mt-8 bg-gray-700 text-white py-2 px-6 rounded-lg hover:bg-gray-600 transition duration-300">Logout</button>
+        </div>
+    </section>
+    
+    <section id="questionnaire-screen" class="hidden bg-black/70 p-8 rounded-xl shadow-lg">
+        
+        <button id="back-to-dashboard-btn" class="absolute top-4 left-4 bg-transparent border-none text-amber-500 hover:text-amber-400 transition duration-200 text-3xl font-bold p-2 focus:outline-none">
+            ←
+        </button>
+
+        <div id="question-container"></div>
+        
+        <div class="flex justify-between mt-8">
+            <div class="flex space-x-4">
+                <button id="prev-btn" class="bg-gray-700 text-white py-2 px-6 rounded-lg hover:bg-gray-600 transition duration-300 disabled:opacity-30 disabled:hover:bg-gray-700" disabled>Previous</button>
+            </div>
+            
+            <div class="flex justify-end">
+                <button id="next-btn" class="bg-indigo-600 text-white py-2 px-6 rounded-lg hover:bg-indigo-500 transition duration-300">Next</button>
+            </div>
+        </div>
+        <div class="mt-4 text-center text-sm text-gray-500">
+            Question <span id="current-q-number">1</span> of <span id="total-q-number"></span>
+        </div>
+    </section>
+    
+    <section id="processing-screen" class="fixed inset-0 flex items-center justify-center z-50 bg-black/80 backdrop-blur-sm hidden">
+        <div class="text-center">
+            <div class="dosha-spinner mx-auto mb-8"></div>
+            <p class="text-xl text-gray-300 font-semibold">Analyzing your Prakriti...</p>
+            <p class="text-sm text-gray-500 mt-2">This should only take a moment.</p>
+        </div>
+    </section>
+
+    <section id="results-screen" class="hidden bg-black/70 p-0 rounded-xl shadow-lg max-w-4xl mx-auto overflow-hidden">
+        
+        <div class="flex flex-col md:flex-row h-full">
+            
+            <div id="result-image-container" class="w-full md:w-1/3 bg-gray-900 flex flex-col items-center justify-center p-8 text-center transition-all duration-1000 ease-out">
+                <h2 class="text-2xl font-bold mb-2 text-white">Your Prakriti:</h2>
+                <img id="result-dosha-image" src="" alt="Dominant Dosha Icon" class="w-36 h-36 rounded-full border-4 border-indigo-400 p-2 shadow-2xl mb-4">
+                <p id="result-dosha" class="text-4xl sm:text-5xl font-extrabold text-indigo-400"></p>
+                <p class="text-sm text-gray-400 mt-2">The foundation of your health.</p>
+            </div>
+            
+            <div id="result-description-container" class="w-full md:w-2/3 p-8 flex flex-col justify-between bg-black/70 transition-all duration-1000 ease-out">
+                
+                <div id="result-description" class="text-left text-gray-300 space-y-4">
+                    </div>
+
+                <div class="mt-8">
+                    <div id="next-steps-info" class="mb-6 p-4 rounded-lg bg-gray-900/50">
+                        <p id="next-steps-prompt" class="text-center text-gray-400">Click 'View Personalized Chart' to view recommendations on a full screen.</p>
+                    </div>
+
+                    <h3 class="text-xl font-semibold mb-4 text-white border-t border-gray-700 pt-4">Your Wellness Path</h3>
+                    <p class="text-gray-400 text-sm max-w-2xl mx-auto">Understanding your Prakriti is the first step towards a balanced life. Reflect on how these traits influence your daily life, health, and well-being.</p>
+                </div>
+                
+                <div class="flex justify-center flex-col md:flex-row mt-8 space-y-3 md:space-y-0 md:space-x-4">
+                    <button id="get-chart-btn" class="bg-amber-600 text-white py-3 px-6 rounded-lg shadow-xl font-semibold hover:bg-amber-500 transition duration-300">
+                        View Personalized Chart
+                    </button>
+                    <button id="go-to-dashboard-btn" class="bg-teal-600 text-white py-3 px-6 rounded-lg shadow-xl font-semibold hover:bg-teal-500 transition duration-300">
+                        Go to Dashboard
+                    </button>
+                    <button id="retake-btn" class="bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-500 transition duration-300">Retake Test</button>
+                    <button id="logout-btn" class="bg-gray-700 text-white py-3 px-6 rounded-lg hover:bg-gray-600 transition duration-300">Logout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="chart-view-screen" class="hidden fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4">
+        
+        <div class="w-full max-w-4xl mx-auto mb-4">
+            <button id="back-to-results-btn" class="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300 flex items-center back-button-blur-bg">
+                <span class="text-xl mr-2">←</span> Back to Results
+            </button>
+        </div>
+        
+        <div class="w-full max-w-4xl overflow-y-auto max-h-[90vh] bg-gray-900 rounded-lg shadow-2xl">
+            <img id="chart-view-image" src="" alt="Personalized Dosha Balance Chart" class="w-full h-auto object-contain">
+        </div>
+        
+    </section>
+
+    <section id="history-view-screen" class="hidden fixed inset-0 z-40 bg-black/90 flex flex-col items-center p-4 pt-10">
+        <div class="w-full max-w-2xl mx-auto mb-6">
+             <button id="back-from-history-btn" class="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300 flex items-center back-button-blur-bg">
+                <span class="text-xl mr-2">←</span> Back to Dashboard
+            </button>
+        </div>
+        <div class="w-full max-w-2xl text-center">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6">Your Assessment History</h2>
+            <div id="history-list">
+                <p class="text-gray-500 mt-4">Loading past results...</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="basics-view-screen" class="hidden fixed inset-0 z-40 bg-black/90 flex flex-col items-center p-4 pt-10">
+        <div class="w-full max-w-4xl mx-auto mb-6 flex justify-between items-center z-10">
+             <button id="back-from-basics-btn" class="bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition duration-300 flex items-center back-button-blur-bg">
+                <span class="text-xl mr-2">←</span> Back to Dashboard
+            </button>
+            <span id="carousel-counter" class="text-lg font-semibold text-gray-300 back-button-blur-bg p-2 rounded-full">1 / 7</span>
+        </div>
+        
+        <div id="carousel-container" class="w-full max-w-4xl h-[85vh] relative overflow-x-scroll overflow-y-hidden rounded-xl shadow-2xl scroll-smooth scroll-snap-x-container">
+            
+            <div id="carousel-track" class="flex h-full w-full-7-items">
+                </div>
+        </div>
+
+        <button id="carousel-prev-btn" class="absolute top-1/2 left-6 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/80 transition duration-200 disabled:opacity-30 z-20">
+            <span class="text-2xl">‹</span>
+        </button>
+        <button id="carousel-next-btn" class="absolute top-1/2 right-6 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/80 transition duration-200 disabled:opacity-30 z-20">
+            <span class="text-2xl">›</span>
+        </button>
+    </section>
+
+
+    <div id="message-box" class="hidden fixed top-5 right-5 bg-red-700 text-white py-3 px-5 rounded-lg shadow-lg">
+        <p id="message-text"></p>
+    </div>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
